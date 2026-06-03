@@ -2,7 +2,7 @@
 
 Dit document beschrijft de beoogde C++-structuur voor de omzetting van het Python-pakket naar
 een didactisch leesbare C++-codebase. Het volgt de huidige instructies in `AGENTS.md`,
-`PATTERNS.md`, `STYLE_GUIDE.md` en `DIDAKTIEK.md`.
+`CONSTRAINTS.md`, `STYLE_GUIDE.md` en `DIDAKTIEK.md`.
 
 ## Ontwerpprincipes
 

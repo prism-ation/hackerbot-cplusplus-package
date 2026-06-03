@@ -1,6 +1,6 @@
 # Migratievoorstel: Python package naar C++
 
-Dit voorstel beschrijft hoe de huidige Python-package stapsgewijs kan worden omgezet naar een didactisch leesbare C++-codebase. Het sluit aan op `AGENTS.md`, `PATTERNS.md`, `STYLE_GUIDE.md`, `DIDAKTIEK.md` en `ARCHITECTURE.md`.
+Dit voorstel beschrijft hoe de huidige Python-package stapsgewijs kan worden omgezet naar een didactisch leesbare C++-codebase. Het sluit aan op `AGENTS.md`, `CONSTRAINTS.md`, `STYLE_GUIDE.md`, `DIDAKTIEK.md` en `ARCHITECTURE.md`.
 
 ## Doel
 
