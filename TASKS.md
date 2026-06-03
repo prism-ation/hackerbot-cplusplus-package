@@ -4,16 +4,16 @@ Deze takenlijst volgt de voorgestelde fasering uit `MIGRATION_PROPOSAL.md` en `A
 
 ## Fase 1: Fundament
 
-- [ ] Maak een root `CMakeLists.txt` aan voor het C++-pakket.
-- [ ] Definieer het library-target voor de core bibliotheek.
-- [ ] Definieer een executable-target voor een minimale entry point of demo.
-- [ ] Koppel `include/` als publieke include-directory.
-- [ ] Koppel `src/` als broncode-structuur.
-- [ ] Koppel `doxyfile.in` aan CMake via `configure_file`.
-- [ ] Voeg een `docs` target toe voor Doxygen-generatie.
-- [ ] Koppel GoogleTest als testframework via CMake.
-- [ ] Maak een `tests/` subdirectory met een eigen `CMakeLists.txt`.
-- [ ] Voeg een eerste build- en test-run toe om de basis te verifiëren.
+- [x] Maak een root `CMakeLists.txt` aan voor het C++-pakket.
+- [x] Definieer het library-target voor de core bibliotheek.
+- [x] Definieer een executable-target voor een minimale entry point of demo.
+- [x] Koppel `include/` als publieke include-directory.
+- [x] Koppel `src/` als broncode-structuur.
+- [x] Koppel `doxyfile.in` aan CMake via `configure_file`.
+- [x] Voeg een `docs` target toe voor Doxygen-generatie.
+- [x] Koppel GoogleTest als testframework via CMake.
+- [x] Maak een `tests/` subdirectory met een eigen `CMakeLists.txt`.
+- [x] Voeg een eerste build- en test-run toe om de basis te verifiëren.
 
 Oplevering:
 
@@ -136,8 +136,8 @@ Oplevering:
 
 Als je klein wilt starten, pak dan deze taken eerst:
 
-- [ ] Root `CMakeLists.txt` opzetten.
-- [ ] `SerialPortConfig` en `SerialTransport` ontwerpen.
-- [ ] `CommandCodec` en `ResponseParser` schetsen.
-- [ ] Eerste GTest testtarget toevoegen.
-- [ ] Eerste Doxygen target laten werken.
+- [x] Root `CMakeLists.txt` opzetten.
+- [x] `SerialPortConfig` en `SerialTransport` ontwerpen.
+- [x] `CommandCodec` en `ResponseParser` schetsen.
+- [x] Eerste GTest testtarget toevoegen.
+- [x] Eerste Doxygen target laten werken.
