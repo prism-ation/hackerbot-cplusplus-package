@@ -11,9 +11,13 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(GTest REQUIRED)
+find_package(Threads REQUIRED)
 
 add_library(${PROJECT_NAME}_lib
-    src/hackerbot/Hackerbot.cpp)
+    src/hackerbot/Hackerbot.cpp
+    src/protocol/CommandCodec.cpp
+    src/protocol/ResponseParser.cpp
+    src/transport/SerialTransport.cpp)
 
 target_include_directories(${PROJECT_NAME}_lib
     PUBLIC
@@ -21,6 +25,9 @@ target_include_directories(${PROJECT_NAME}_lib
         ${PROJECT_BINARY_DIR}/generated)
 
 target_compile_features(${PROJECT_NAME}_lib PUBLIC cxx_std_17)
+target_link_libraries(${PROJECT_NAME}_lib
+    PUBLIC
+        Threads::Threads)
 
 add_executable(${PROJECT_NAME}
     src/main.cpp)

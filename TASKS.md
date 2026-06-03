@@ -23,14 +23,14 @@ Oplevering:
 
 ## Fase 2: Transport en protocol
 
-- [ ] Ontwerp `SerialPortConfig` als duidelijke value type of configuratiestructuur.
-- [ ] Implementeer `SerialTransport` op basis van Boost.Asio.
-- [ ] Zorg voor openen, sluiten, schrijven en lezen via de transportlaag.
-- [ ] Voeg timeout- en foutafhandeling toe op transportniveau.
-- [ ] Implementeer `CommandCodec` voor commandostrings.
-- [ ] Implementeer `ResponseParser` voor tekstuele of JSON-responses.
-- [ ] Leg testfakes of mocks vast voor transportafhankelijke tests.
-- [ ] Schrijf unittests voor succesvolle I/O en foutpaden.
+- [x] Ontwerp `SerialPortConfig` als duidelijke value type of configuratiestructuur.
+- [x] Implementeer `SerialTransport` op basis van Boost.Asio.
+- [x] Zorg voor openen, sluiten, schrijven en lezen via de transportlaag.
+- [x] Voeg timeout- en foutafhandeling toe op transportniveau.
+- [x] Implementeer `CommandCodec` voor commandostrings.
+- [x] Implementeer `ResponseParser` voor tekstuele of JSON-responses.
+- [x] Leg testfakes of mocks vast voor transportafhankelijke tests.
+- [x] Schrijf unittests voor succesvolle I/O en foutpaden.
 
 Oplevering:
 
