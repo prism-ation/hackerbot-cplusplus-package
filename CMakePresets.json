@@ -1,0 +1,50 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "host",
+            "displayName": "Host build",
+            "description": "Build and test on the current machine.",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/host",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "BUILD_TESTING": "ON"
+            }
+        },
+        {
+            "name": "rpi",
+            "displayName": "Raspberry Pi 5 cross build",
+            "description": "Cross-compile for Raspberry Pi 5 using the toolchain file.",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/rpi",
+            "toolchainFile": "${sourceDir}/toolchain-rpi.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "BUILD_TESTING": "OFF",
+                "RPI_TOOLCHAIN_PREFIX": "aarch64-linux-gnu"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "host",
+            "configurePreset": "host"
+        },
+        {
+            "name": "rpi",
+            "configurePreset": "rpi"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "host",
+            "configurePreset": "host"
+        }
+    ]
+}

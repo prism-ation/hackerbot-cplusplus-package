@@ -10,14 +10,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-find_package(GTest REQUIRED)
+include(CTest)
 find_package(Threads REQUIRED)
 
 add_library(${PROJECT_NAME}_lib
     src/hackerbot/Hackerbot.cpp
     src/protocol/CommandCodec.cpp
     src/protocol/ResponseParser.cpp
-    src/transport/SerialTransport.cpp)
+    src/transport/SerialTransport.cpp
+    src/core/CoreService.cpp)
 
 target_include_directories(${PROJECT_NAME}_lib
     PUBLIC
@@ -36,9 +37,11 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE
         ${PROJECT_NAME}_lib)
 
-enable_testing()
-
-add_subdirectory(tests)
+if(BUILD_TESTING)
+    find_package(GTest REQUIRED)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)

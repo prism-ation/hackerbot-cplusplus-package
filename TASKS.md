@@ -40,12 +40,12 @@ Oplevering:
 
 ## Fase 3: Core en state
 
-- [ ] Definieer `RobotState` voor componentstatus en globale toestand.
-- [ ] Implementeer `CoreService::ping`.
-- [ ] Implementeer `CoreService::version`.
-- [ ] Vertaal attachment- en capability-informatie naar expliciete statusvelden.
-- [ ] Leg foutgedrag vast voor ontbrekende of ongeldige responses.
-- [ ] Schrijf tests voor alle combinaties van attached/not attached.
+- [x] Definieer `RobotState` voor componentstatus en globale toestand.
+- [x] Implementeer `CoreService::ping`.
+- [x] Implementeer `CoreService::version`.
+- [x] Vertaal attachment- en capability-informatie naar expliciete statusvelden.
+- [x] Leg foutgedrag vast voor ontbrekende of ongeldige responses.
+- [x] Schrijf tests voor alle combinaties van attached/not attached.
 
 Oplevering:
 
