@@ -5,6 +5,7 @@
 #include <chrono>
 #include <memory>
 #include <stdexcept>
+#include <thread>
 #include <utility>
 
 namespace hackerbot::transport
@@ -45,8 +46,22 @@ namespace hackerbot::transport
                     throw std::runtime_error("failed to open serial device: " + openError.message());
                 }
 
+                /*
+                 * a very common failure sequence is:
+                 *  1. Pi opens serial port.
+                 *  2. Adafruit QT Py resets.
+                 *  3. Adafruit QT Py bootloader starts.
+                 *  4. Pi immediately writes PING command.
+                 *  5. Adafruit QT Py isn't running your sketch yet, so the command is lost.
+                 *  6. Adafruit QT Py eventually starts the sketch.
+                 *  7. Pi waits forever in: readLine() operation.
+                 * To mitigate this, we wait a bit after opening the port to give the Adafruit QT Py time to start up.
+                 */
+
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+
                 serialPort.set_option(boost::asio::serial_port_base::baud_rate(aConfig.baudRate));
-                serialPort.set_option(boost::asio::serial_port_base::character_size(8));
+                serialPort.set_option(boost::asio::serial_port_base::character_size(aConfig.characterSize));
                 serialPort.set_option(boost::asio::serial_port_base::parity(toBoostParity(aConfig.parity)));
                 serialPort.set_option(boost::asio::serial_port_base::stop_bits(toBoostStopBits(aConfig.stopBits)));
                 serialPort.set_option(
@@ -254,6 +269,11 @@ namespace hackerbot::transport
         if (aConfig.deviceName.empty())
         {
             throw std::invalid_argument("serial device name must not be empty");
+        }
+
+        if (aConfig.characterSize == 0)
+        {
+            throw std::invalid_argument("serial character size must be positive");
         }
 
         if (aConfig.timeout.count() <= 0)

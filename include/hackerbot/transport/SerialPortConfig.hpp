@@ -35,7 +35,8 @@ namespace hackerbot::transport
         };
 
         std::string deviceName;                     /**< Serial device path. */
-        unsigned int baudRate{115200};              /**< Baud rate in bits per second. */
+        unsigned int baudRate{230400};              /**< Baud rate in bits per second. */
+        unsigned int characterSize{8};              /**< Serial character size in bits. */
         Parity parity{Parity::None};                /**< Serial parity setting. */
         StopBits stopBits{StopBits::One};           /**< Serial stop-bit setting. */
         FlowControl flowControl{FlowControl::None}; /**< Serial flow-control setting. */

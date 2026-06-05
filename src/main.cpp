@@ -11,7 +11,7 @@
 namespace
 {
 
-    constexpr const char *defaultDeviceName = "/dev/ttyUSB0";
+    constexpr const char *defaultDeviceName = "/dev/ttyACM0";
     constexpr int successExitCode = 0;
     constexpr int failureExitCode = 1;
 

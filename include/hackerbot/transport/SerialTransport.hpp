@@ -21,7 +21,8 @@ namespace hackerbot::transport
 
         /**
          * @brief Opens the backend with the provided serial configuration.
-         * @pre The configuration has a non-empty device name and a positive timeout.
+         * @pre The configuration has a non-empty device name, a positive timeout and a positive
+         *      character size.
          * @post The backend is open if no exception is thrown.
          * @throws std::invalid_argument when the configuration is invalid.
          * @throws std::runtime_error when the device cannot be opened.

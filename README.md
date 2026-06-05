@@ -12,7 +12,7 @@ Meer informatie over het platform, de beschikbare modellen en het ecosysteem vin
 
 Deze repository bevat de C++-variant van Hackerbot. Het project volgt een duidelijke laagindeling
 met onder meer transport, protocol, core state en een publieke façade, en is opgezet met CMake,
-GoogleTest en Doxygen.
+GoogleTest, Boost en Doxygen.
 
 ## Raspberry Pi 5 cross-compilatie
 
@@ -70,3 +70,8 @@ cmake --build --preset rpi
 
 Het `rpi`-preset is standaard alleen voor builden. De unittests zijn bedoeld om op de hostbuild te
 draaien, tenzij je later een target-side testopzet toevoegt.
+
+### Bronnen
+
+* [install boost](https://dev.to/dubeykartikay/how-to-install-boost-in-any-c-project-cmake-vcpkg-conan-and-more-2nk2)
+* [cross-compile rpi toolchain](https://medium.com/@au42/the-useful-raspberrypi-cross-compile-guide-ea56054de187)

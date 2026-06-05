@@ -18,6 +18,7 @@ namespace
     {
         SerialPortConfig config;
         config.deviceName = "/dev/ttyUSB0";
+        config.characterSize = 8;
         config.timeout = std::chrono::milliseconds(250);
         return config;
     }
@@ -37,6 +38,7 @@ TEST(SerialTransportTest, OpensBackendWithConfiguredDevice)
     EXPECT_TRUE(transport.isOpen());
     ASSERT_EQ(backendPointer->openCalls.size(), 1u);
     EXPECT_EQ(backendPointer->openCalls.front().deviceName, "/dev/ttyUSB0");
+    EXPECT_EQ(backendPointer->openCalls.front().characterSize, 8u);
 }
 
 // @post Verifies that writes are normalized with a trailing newline before reaching the backend.
@@ -71,6 +73,17 @@ TEST(SerialTransportTest, RejectsInvalidConfiguration)
 {
     auto backend = hackerbot::test::makeFakeSerialTransportBackend();
     SerialTransport transport(SerialPortConfig{}, std::move(backend));
+
+    EXPECT_THROW(transport.open(), std::invalid_argument);
+}
+
+// @throws Verifies that zero character size is rejected before opening.
+TEST(SerialTransportTest, RejectsZeroCharacterSize)
+{
+    auto backend = hackerbot::test::makeFakeSerialTransportBackend();
+    SerialPortConfig config = makeValidConfig();
+    config.characterSize = 0;
+    SerialTransport transport(config, std::move(backend));
 
     EXPECT_THROW(transport.open(), std::invalid_argument);
 }
