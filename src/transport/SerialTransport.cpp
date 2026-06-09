@@ -102,6 +102,7 @@ namespace hackerbot::transport
                 std::string line = aLine;
                 if (line.empty() || line.back() != '\n')
                 {
+                    line.push_back('\r');
                     line.push_back('\n');
                 }
 
@@ -298,6 +299,7 @@ namespace hackerbot::transport
         std::string line(aLine);
         if (line.empty() || line.back() != '\n')
         {
+            line.push_back('\r');
             line.push_back('\n');
         }
 
