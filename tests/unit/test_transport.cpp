@@ -68,6 +68,20 @@ TEST(SerialTransportTest, ReadsLineFromBackend)
     EXPECT_EQ(transport.readLine(), "OK:ready");
 }
 
+// @post Verifies that closing the transport closes the backend after it has been opened.
+TEST(SerialTransportTest, ClosesBackendAfterOpen)
+{
+    auto backend = hackerbot::test::makeFakeSerialTransportBackend();
+    auto *backendPointer = backend.get();
+    SerialTransport transport(makeValidConfig(), std::move(backend));
+
+    transport.open();
+    transport.close();
+
+    EXPECT_FALSE(transport.isOpen());
+    EXPECT_EQ(backendPointer->closeCalls, 1u);
+}
+
 // @throws Verifies that invalid transport configurations are rejected before opening.
 TEST(SerialTransportTest, RejectsInvalidConfiguration)
 {

@@ -22,6 +22,11 @@ namespace hackerbot::transport
             {
             }
 
+            ~AsioSerialTransportBackend() noexcept override
+            {
+                close();
+            }
+
             void open(const SerialPortConfig &aConfig) override
             {
                 if (aConfig.deviceName.empty())
@@ -75,7 +80,11 @@ namespace hackerbot::transport
             {
                 boost::system::error_code closeError;
                 timer.cancel(closeError);
-                serialPort.close(closeError);
+
+                if (serialPort.is_open())
+                {
+                    serialPort.close(closeError);
+                }
             }
 
             bool isOpen() const noexcept override
