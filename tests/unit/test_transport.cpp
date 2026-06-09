@@ -52,7 +52,7 @@ TEST(SerialTransportTest, NormalizesWrittenLines)
     transport.writeLine("PING");
 
     ASSERT_EQ(backendPointer->writtenLines.size(), 1u);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "PING\n");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "PING\r\n");
 }
 
 // @post Verifies that reads are forwarded from the backend.
