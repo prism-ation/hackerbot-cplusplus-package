@@ -88,8 +88,9 @@ namespace hackerbot::transport
         SerialTransport(SerialPortConfig aConfig, std::unique_ptr<SerialTransportBackend> aBackend);
 
         /**
-         * @brief Opens the configured serial transport.
-         * @pre The configuration has a non-empty device name and a positive timeout.
+        * @brief Opens the configured serial transport.
+        * @pre The configuration has a non-empty device name, a positive timeout and a positive
+        *      character size.
          * @post The transport is open if no exception is thrown.
          * @throws std::invalid_argument when the configuration is invalid.
          * @throws std::runtime_error when the backend fails to open the device.

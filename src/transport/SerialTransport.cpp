@@ -61,7 +61,8 @@ namespace hackerbot::transport
                 std::this_thread::sleep_for(std::chrono::seconds(1));
 
                 serialPort.set_option(boost::asio::serial_port_base::baud_rate(aConfig.baudRate));
-                serialPort.set_option(boost::asio::serial_port_base::character_size(aConfig.characterSize));
+                serialPort.set_option(
+                    boost::asio::serial_port_base::character_size(aConfig.characterSize));
                 serialPort.set_option(boost::asio::serial_port_base::parity(toBoostParity(aConfig.parity)));
                 serialPort.set_option(boost::asio::serial_port_base::stop_bits(toBoostStopBits(aConfig.stopBits)));
                 serialPort.set_option(
@@ -118,11 +119,12 @@ namespace hackerbot::transport
                 timer.expires_after(timeout);
                 timer.async_wait([this, &timedOut](const boost::system::error_code &aError)
                                  {
-            if (!aError) {
-                timedOut = true;
-                boost::system::error_code cancelError;
-                serialPort.cancel(cancelError);
-            } });
+                                     if (!aError)
+                                     {
+                                         timedOut = true;
+                                         boost::system::error_code cancelError;
+                                         serialPort.cancel(cancelError);
+                                     } });
 
                 boost::asio::async_read_until(serialPort, buffer, '\n',
                                               [&completed, &readError](const boost::system::error_code &aError, std::size_t)
