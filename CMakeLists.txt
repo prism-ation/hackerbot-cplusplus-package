@@ -18,7 +18,10 @@ add_library(${PROJECT_NAME}_lib
     src/protocol/CommandCodec.cpp
     src/protocol/ResponseParser.cpp
     src/transport/SerialTransport.cpp
-    src/core/CoreService.cpp)
+    src/core/CoreService.cpp
+    src/base/BaseDriver.cpp
+    src/base/BaseFacade.cpp
+    src/base/MapsService.cpp)
 
 target_include_directories(${PROJECT_NAME}_lib
     PUBLIC

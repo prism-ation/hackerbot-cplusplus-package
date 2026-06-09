@@ -54,13 +54,13 @@ Oplevering:
 
 ## Fase 4: Base en navigatie
 
-- [ ] Ontwerp `BaseDriver` voor low-level basecommando's.
-- [ ] Implementeer `BaseDriver` voor init, start, drive, dock, status en pose.
-- [ ] Ontwerp `BaseFacade` voor gebruikersgerichte acties.
-- [ ] Implementeer `MapsService` voor maplist, mapdata en pose-workflows.
-- [ ] Splits map- en navigatielogica uit de low-level driver.
-- [ ] Definieer value types voor positie, status en mapinformatie.
-- [ ] Schrijf tests voor rijden, docken, status en foutafhandeling.
+- [x] Ontwerp `BaseDriver` voor low-level basecommando's.
+- [x] Implementeer `BaseDriver` voor init, start, drive, dock, status en pose.
+- [x] Ontwerp `BaseFacade` voor gebruikersgerichte acties.
+- [x] Implementeer `MapsService` voor maplist, mapdata en pose-workflows.
+- [x] Splits map- en navigatielogica uit de low-level driver.
+- [x] Definieer value types voor positie, status en mapinformatie.
+- [x] Schrijf tests voor rijden, docken, status en foutafhandeling.
 
 Oplevering:
 

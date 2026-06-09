@@ -2,7 +2,9 @@ add_executable(${PROJECT_NAME}Tests
     unit/test_hackerbot.cpp
     unit/test_protocol.cpp
     unit/test_core.cpp
-    unit/test_transport.cpp)
+    unit/test_transport.cpp
+    unit/test_base.cpp
+    unit/test_maps.cpp)
 
 target_link_libraries(${PROJECT_NAME}Tests
     PRIVATE
