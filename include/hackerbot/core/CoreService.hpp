@@ -7,6 +7,7 @@
 #include "hackerbot/transport/SerialTransport.hpp"
 
 #include <string>
+#include <string_view>
 
 namespace hackerbot::core
 {
@@ -46,7 +47,7 @@ namespace hackerbot::core
         std::string version();
 
     private:
-        void writeAndReadResponse(const std::string &aCommand,
+        void writeAndReadResponse(std::string_view aCommand,
                                   hackerbot::protocol::Response &aResponse);
 
         hackerbot::transport::SerialTransport &transport;

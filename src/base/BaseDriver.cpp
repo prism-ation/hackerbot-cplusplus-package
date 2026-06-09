@@ -1,6 +1,7 @@
 #include "hackerbot/base/BaseDriver.hpp"
 
 #include <string>
+#include <string_view>
 
 namespace hackerbot::base
 {
@@ -8,15 +9,15 @@ namespace hackerbot::base
     namespace
     {
 
-        constexpr const char *initializeCommand = "B_INIT";
-        constexpr const char *startCommand = "B_START";
-        constexpr const char *driveCommand = "B_DRIVE";
-        constexpr const char *dockCommand = "B_DOCK";
-        constexpr const char *statusCommand = "B_STATUS";
-        constexpr const char *poseCommand = "B_POSE";
-        constexpr const char *mapListCommand = "B_MAPLIST";
-        constexpr const char *mapDataCommand = "B_MAPDATA";
-        constexpr const char *goToCommand = "B_GOTO";
+        constexpr std::string_view initializeCommand = "B_INIT";
+        constexpr std::string_view startCommand = "B_START";
+        constexpr std::string_view driveCommand = "B_DRIVE";
+        constexpr std::string_view dockCommand = "B_DOCK";
+        constexpr std::string_view statusCommand = "B_STATUS";
+        constexpr std::string_view poseCommand = "B_POSE";
+        constexpr std::string_view mapListCommand = "B_MAPLIST";
+        constexpr std::string_view mapDataCommand = "B_MAPDATA";
+        constexpr std::string_view goToCommand = "B_GOTO";
 
     } // namespace
 
@@ -85,7 +86,7 @@ namespace hackerbot::base
     }
 
     hackerbot::protocol::Response BaseDriver::writeAndRead(
-        const std::string &aCommand,
+        std::string_view aCommand,
         std::initializer_list<std::string_view> aArguments)
     {
         transport.writeLine(commandCodec.encode(aCommand, aArguments));

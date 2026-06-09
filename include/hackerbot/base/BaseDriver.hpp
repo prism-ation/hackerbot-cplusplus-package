@@ -117,7 +117,7 @@ namespace hackerbot::base
 
     private:
         hackerbot::protocol::Response writeAndRead(
-            const std::string &aCommand,
+            std::string_view aCommand,
             std::initializer_list<std::string_view> aArguments = {});
 
         hackerbot::transport::SerialTransport &transport;

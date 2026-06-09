@@ -1,6 +1,7 @@
 #include "hackerbot/core/CoreService.hpp"
 
 #include <stdexcept>
+#include <string_view>
 #include <utility>
 
 namespace hackerbot::core
@@ -9,8 +10,8 @@ namespace hackerbot::core
     namespace
     {
 
-        constexpr const char *pingCommand = "PING";
-        constexpr const char *versionCommand = "VERSION";
+        constexpr std::string_view pingCommand = "PING";
+        constexpr std::string_view versionCommand = "VERSION";
 
     } // namespace
 
@@ -53,7 +54,7 @@ namespace hackerbot::core
         return response.message;
     }
 
-    void CoreService::writeAndReadResponse(const std::string &aCommand, hackerbot::protocol::Response &aResponse)
+    void CoreService::writeAndReadResponse(std::string_view aCommand, hackerbot::protocol::Response &aResponse)
     {
         transport.writeLine(commandCodec.encode(aCommand));
         aResponse = responseParser.parse(transport.readLine());
