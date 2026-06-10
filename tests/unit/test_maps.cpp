@@ -35,7 +35,7 @@ TEST(MapsServiceTest, ListMapsParsesMapIdentifiers)
     EXPECT_EQ(mapList[0].mapId, "home");
     EXPECT_EQ(mapList[1].mapId, "lab");
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_MAPLIST");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_MAPLIST\r\n");
 }
 
 // @post Verifies that fetchMapData returns compressed payload for the requested map.
@@ -59,7 +59,7 @@ TEST(MapsServiceTest, FetchMapDataReturnsCompressedPayload)
     EXPECT_EQ(mapData.mapId, "home");
     EXPECT_EQ(mapData.compressedMapData, "abc123");
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_MAPDATA home");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_MAPDATA home\r\n");
 }
 
 // @post Verifies that goToPose forwards navigation parameters through the low-level driver.
@@ -85,7 +85,7 @@ TEST(MapsServiceTest, GoToPoseForwardsNavigationCommand)
 
     EXPECT_TRUE(maps.goToPose(target, 0.2));
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_GOTO 1.000000 2.000000 90.000000 0.200000");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_GOTO 1.000000 2.000000 90.000000 0.200000\r\n");
 }
 
 // @post Verifies that waitUntilReached returns true when pose reaches target within tolerance.
@@ -113,8 +113,8 @@ TEST(MapsServiceTest, WaitUntilReachedReturnsTrueAtTarget)
 
     EXPECT_TRUE(maps.waitUntilReached(target, 0.1, 2));
     ASSERT_EQ(backendPointer->writtenLines.size(), 2U);
-    EXPECT_EQ(backendPointer->writtenLines[0], "B_POSE");
-    EXPECT_EQ(backendPointer->writtenLines[1], "B_POSE");
+    EXPECT_EQ(backendPointer->writtenLines[0], "B_POSE\r\n");
+    EXPECT_EQ(backendPointer->writtenLines[1], "B_POSE\r\n");
 }
 
 // @post Verifies that waitUntilReached returns false after exhausting polling budget.

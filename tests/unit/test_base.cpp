@@ -30,7 +30,7 @@ TEST(BaseDriverTest, InitializeReturnsTrueOnSuccess)
 
     EXPECT_TRUE(driver.initialize());
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_INIT");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_INIT\r\n");
 }
 
 // @post Returns false when B_START receives an explicit protocol failure.
@@ -51,7 +51,7 @@ TEST(BaseDriverTest, StartReturnsFalseOnExplicitFailure)
 
     EXPECT_FALSE(driver.start());
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_START");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_START\r\n");
 }
 
 // @post Encodes B_DRIVE with linear and angular arguments and reports success.
@@ -72,7 +72,7 @@ TEST(BaseDriverTest, DriveEncodesCommandArguments)
 
     EXPECT_TRUE(driver.drive(200, -45));
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_DRIVE 200 -45");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_DRIVE 200 -45\r\n");
 }
 
 // @post Returns parsed payload for status responses.
@@ -95,7 +95,7 @@ TEST(BaseDriverTest, StatusReturnsParsedPayload)
     EXPECT_TRUE(response.success);
     EXPECT_EQ(response.message, "{\"left_set_speed\":0,\"right_set_speed\":0}");
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_STATUS");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_STATUS\r\n");
 }
 
 // @throws Rejects malformed pose responses.
@@ -116,7 +116,7 @@ TEST(BaseDriverTest, PoseRejectsMalformedResponse)
 
     EXPECT_THROW(driver.pose(), std::invalid_argument);
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_POSE");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_POSE\r\n");
 }
 
 // @post Forwards B_MAPLIST and returns parsed map-list protocol response.
@@ -139,7 +139,7 @@ TEST(BaseDriverTest, MapListForwardsCommand)
     EXPECT_TRUE(response.success);
     EXPECT_EQ(response.message, "{\"map_ids\":[\"home\",\"lab\"]}");
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_MAPLIST");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_MAPLIST\r\n");
 }
 
 // @post Forwards B_MAPDATA with the given map id.
@@ -161,7 +161,7 @@ TEST(BaseDriverTest, MapDataForwardsMapId)
 
     EXPECT_TRUE(response.success);
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_MAPDATA home");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_MAPDATA home\r\n");
 }
 
 // @post Forwards B_GOTO with target pose and speed.
@@ -182,7 +182,7 @@ TEST(BaseDriverTest, GoToForwardsNavigationCommand)
 
     EXPECT_TRUE(driver.goTo(1.0, 2.0, 90.0, 0.25));
     ASSERT_EQ(backendPointer->writtenLines.size(), 1U);
-    EXPECT_EQ(backendPointer->writtenLines.front(), "B_GOTO 1.000000 2.000000 90.000000 0.250000");
+    EXPECT_EQ(backendPointer->writtenLines.front(), "B_GOTO 1.000000 2.000000 90.000000 0.250000\r\n");
 }
 
 // @post Verifies that drive automatically starts driver mode when needed.
@@ -207,8 +207,8 @@ TEST(BaseFacadeTest, DriveStartsDriverModeWhenNeeded)
     EXPECT_TRUE(facade.isDriverMode());
     EXPECT_FALSE(facade.isDocked());
     ASSERT_EQ(backendPointer->writtenLines.size(), 2U);
-    EXPECT_EQ(backendPointer->writtenLines[0], "B_START");
-    EXPECT_EQ(backendPointer->writtenLines[1], "B_DRIVE 100 0");
+    EXPECT_EQ(backendPointer->writtenLines[0], "B_START\r\n");
+    EXPECT_EQ(backendPointer->writtenLines[1], "B_DRIVE 100 0\r\n");
 }
 
 // @post Verifies that dock disables driver mode and marks the base as docked.
