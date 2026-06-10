@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 # https://stackoverflow.com/questions/79146083/finding-boost-without-cmake-find-module-cmp0167
 if(POLICY CMP0167)
-  cmake_policy(SET CMP0167 NEW)
+    cmake_policy(SET CMP0167 OLD)
 endif()
 
 project(Hackerbot
@@ -23,7 +23,7 @@ if(CMAKE_CROSSCOMPILING)
     set(Boost_NO_SYSTEM_PATHS ON)
     set(Boost_NO_BOOST_CMAKE ON)
 endif()
-find_package(Boost MODULE REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system)
 
 add_library(${PROJECT_NAME}_lib
     src/hackerbot/Hackerbot.cpp
