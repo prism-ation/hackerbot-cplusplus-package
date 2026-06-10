@@ -79,7 +79,14 @@ namespace hackerbot::transport
             void close() noexcept override
             {
                 boost::system::error_code closeError;
-                timer.cancel(closeError);
+                try
+                {
+                    timer.cancel();
+                }
+                catch (...)
+                {
+                    // Keep close() noexcept even if timer cancellation fails.
+                }
 
                 if (serialPort.is_open())
                 {

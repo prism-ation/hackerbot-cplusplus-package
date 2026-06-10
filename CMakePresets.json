@@ -26,8 +26,7 @@
             "toolchainFile": "${sourceDir}/toolchain-rpi.cmake",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-                "BUILD_TESTING": "OFF",
-                "RPI_TOOLCHAIN_PREFIX": "aarch64-linux-gnu"
+                "BUILD_TESTING": "OFF"
             }
         }
     ],

@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
+# https://stackoverflow.com/questions/79146083/finding-boost-without-cmake-find-module-cmp0167
+if(POLICY CMP0167)
+  cmake_policy(SET CMP0167 NEW)
+endif()
+
 project(Hackerbot
     VERSION 0.1.0
     DESCRIPTION "Hackerbot C++ package"
@@ -12,6 +17,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(CTest)
 find_package(Threads REQUIRED)
+
+# Cross builds must not pick host Boost from MSYS/Windows include paths.
+if(CMAKE_CROSSCOMPILING)
+    set(Boost_NO_SYSTEM_PATHS ON)
+    set(Boost_NO_BOOST_CMAKE ON)
+endif()
+find_package(Boost MODULE REQUIRED COMPONENTS system)
 
 add_library(${PROJECT_NAME}_lib
     src/hackerbot/Hackerbot.cpp
@@ -31,7 +43,14 @@ target_include_directories(${PROJECT_NAME}_lib
 target_compile_features(${PROJECT_NAME}_lib PUBLIC cxx_std_17)
 target_link_libraries(${PROJECT_NAME}_lib
     PUBLIC
-        Threads::Threads)
+        Threads::Threads
+        Boost::system)
+
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME}_lib
+        PUBLIC
+            ws2_32)
+endif()
 
 add_executable(${PROJECT_NAME}
     src/main.cpp)
