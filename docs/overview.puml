@@ -53,19 +53,19 @@ class HillSensor
 class Gripper
 
 
-RPI -- Mainboard : USB (Serial) >
-RPI -- GripperCam : USB (webcam video0)
-RPI -- HeadCam :  USB (webcam video2)
+RPI -- Mainboard : USB (serial, ttyACM0) >
+RPI -- GripperCam : USB (webcam, video0)
+RPI -- HeadCam :  USB (webcam, video2)
 RPI -- HeadSpeaker : USB (geluidskaart RPI, kanaal 1)
 RPI -- HeadMic : USB (standaard microfoon)
 
-Mainboard -- Base :  Serial (RX/TX) >
-Mainboard -- Temperature : I2C (p3t1755dpz)
+Mainboard -- Base :  UART (RX/TX) >
+Mainboard -- Temperature : I2C (0x4B, p3t1755dpz)
 Base -- HillSensor : onewire? (IR sensor) >
 Base -- Bump : ? (pressure sensor) >
 
-Mainboard -- ToF_Left : ? (VL53L7CX) >
-Mainboard -- ToF_Right : ? (VL53L7CX) >
+Mainboard -- ToF_Left : I2C (0x2B, VL53L7CX) >
+Mainboard -- ToF_Right : I2C (0x2A, VL53L7CX) >
 Mainboard --- Head: I2C (0x5B) >
 Mainboard --- Eyes: I2C (0x5A) >
 Mainboard --- Arm: I2C (0x5C) >
