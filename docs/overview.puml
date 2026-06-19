@@ -1,4 +1,5 @@
 @startuml overview
+
 class RPI
 class Base {
     left_encoder
@@ -41,17 +42,6 @@ class Cobot280
 class Eyes_FW {
     **plaatjes van ogen
 }
-class GripperCam
-class HeadCam
-class ToF_Left
-class ToF_Right
-class Dynamixel 
-class HeadSpeaker
-class HeadMic
-class HillSensor
-
-class Gripper
-
 
 RPI -- Mainboard : USB (serial, ttyACM0) >
 RPI -- GripperCam : USB (webcam, video0)
@@ -61,7 +51,7 @@ RPI -- HeadMic : USB (standaard microfoon)
 
 Mainboard -- Base :  UART (RX/TX) >
 Mainboard -- Temperature : I2C (0x4B, p3t1755dpz)
-Base -- HillSensor : onewire? (IR sensor) >
+Base -- CliffSensor : onewire? (IR sensor) >
 Base -- Bump : ? (pressure sensor) >
 
 Mainboard -- ToF_Left : I2C (0x2B, VL53L7CX) >
