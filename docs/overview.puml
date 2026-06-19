@@ -1,0 +1,78 @@
+@startuml overview
+class RPI
+class Base {
+    left_encoder
+    right_encoder
+    left_speed
+    right_speed
+    left_set_speed
+    right_set_speed
+    **wall_tof
+    bump_left
+    bump_right
+    **wall_left
+    **wall_mid
+    **wall_right
+    cliff_left
+    cliff_front_left
+    cliff_front_right
+    cliff_right
+    **lidar_bump_a
+    **lidar_bump_b
+    dc_plug
+    dust_box
+    mop_l
+}
+class Mainboard
+class Head {
+    Yaw rotate L/R
+    Pitch rotate B/F
+}
+class Eyes
+class Arm {
+    Joint 1 L/R
+    Joint 2 BCK/FWD
+    Joint 3 BCK/FWD
+    Joint 4 BCK/FWD
+    Joint 5 L/R
+    Joint 6 L/R
+}
+class Cobot280
+class Eyes_FW {
+    **plaatjes van ogen
+}
+class GripperCam
+class HeadCam
+class ToF_Left
+class ToF_Right
+class Dynamixel 
+class HeadSpeaker
+class HeadMic
+class HillSensor
+
+class Gripper
+
+
+RPI -- Mainboard : USB (Serial) >
+RPI -- GripperCam : USB (webcam video0)
+RPI -- HeadCam :  USB (webcam video2)
+RPI -- HeadSpeaker : USB (geluidskaart RPI, kanaal 1)
+RPI -- HeadMic : USB (standaard microfoon)
+
+Mainboard -- Base :  Serial (RX/TX) >
+Mainboard -- Temperature : I2C (p3t1755dpz)
+Base -- HillSensor : onewire? (IR sensor) >
+Base -- Bump : ? (pressure sensor) >
+
+Mainboard -- ToF_Left : ? (VL53L7CX) >
+Mainboard -- ToF_Right : ? (VL53L7CX) >
+Mainboard --- Head: I2C (0x5B) >
+Mainboard --- Eyes: I2C (0x5A) >
+Mainboard --- Arm: I2C (0x5C) >
+Arm -- Cobot280 : ? (servo 6-DoF) >
+Arm -- Gripper :  onewire (L7805CV via 74lvc1g125gw/74lvc1g126gw 3-state bus driver) >
+Head -- Dynamixel : onewire (servo 2-DoF 74lvc1g125gw/74lvc1g126gw 3-state bus driver) >
+Eyes -- "2" Eyes_FW : ? >
+Eyes -- Mouth : Audio_R (Graphic Equalizer MSGEQ7) >
+
+@enduml
